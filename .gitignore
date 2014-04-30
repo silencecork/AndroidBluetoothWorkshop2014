@@ -23,8 +23,8 @@ project.properties
 proguard/
 
 /bin
-.classpath
-.project
+#.classpath
+#.project
 /.settings
 /.metadata
 desktop.ini
