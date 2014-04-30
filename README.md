@@ -4,6 +4,9 @@ Android Bluetooth Workshop
 Description
 --------------
 
+- **BasicAndroid**
+Basic Android app example.
+
 - **BluetoothChat**
 This is a simple android bluetooth sample, include discover devices, server and client connection.
 
