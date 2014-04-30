@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, Main!</string>
+    <string name="app_name">BMI3</string>
+	<string name="height">Height (cm)</string>
+	<string name="weight">Weight (kg)</string>
+	<string name="calc">Calc BMI</string>
+	<string name="advice_heavy">You are too Fat</string>
+	<string name="advice_light">You are too Thin</string>
+	<string name="advice_average">You are Good</string>
+	    
+</resources>
