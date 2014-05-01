@@ -42,6 +42,15 @@ public class ClientConnectionActivity extends Activity {
         Button servoRight = (Button) findViewById(R.id.btn_servo_right);
         servoRight.setOnClickListener(mServoRightClickListener);
         
+        Button playOne = (Button) findViewById(R.id.btn_play_one);
+        playOne.setOnClickListener(mPlaySongOne);
+        
+        Button playTwo = (Button) findViewById(R.id.btn_play_two);
+        playTwo.setOnClickListener(mPlaySongTwo);
+        
+        Button playThree = (Button) findViewById(R.id.btn_play_three);
+        playThree.setOnClickListener(mPlaySongThree);
+        
         mReceivedText = (TextView) findViewById(R.id.content);
         
         mScrollView = (ScrollView) findViewById(R.id.content_scroller);
@@ -92,6 +101,33 @@ public class ClientConnectionActivity extends Activity {
         public void onClick(View v) {
             if (mHelper.isConnect()) {
                mHelper.sendMessage("$h800");
+            }
+        }
+    };
+    
+    private OnClickListener mPlaySongOne = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (mHelper.isConnect()) {
+               mHelper.sendMessage("$m000");
+            }
+        }
+    };
+    
+    private OnClickListener mPlaySongTwo = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (mHelper.isConnect()) {
+               mHelper.sendMessage("$m100");
+            }
+        }
+    };
+    
+    private OnClickListener mPlaySongThree = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (mHelper.isConnect()) {
+               mHelper.sendMessage("$m200");
             }
         }
     };
