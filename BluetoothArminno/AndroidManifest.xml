@@ -19,7 +19,6 @@
         <activity
             android:name="com.example.bluetootharminno.DiscoveryActivity"
             android:icon="@drawable/ic_launcher"
-            android:label="@string/discover_activity"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
