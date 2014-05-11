@@ -22,6 +22,9 @@ This is a example that use Android device get the value of LM35 sensor connected
 - **BluetoothUtility**
 This is a wrapper for Android bluetooth connection process.
 
+- **BluetoothArminnoGraph**
+Use Android GraphView which was developed by jjoe64 (https://github.com/jjoe64/GraphView), this example paring the sonar value which received from Bluetooth. 
+
 Copyright
 --------------
 
