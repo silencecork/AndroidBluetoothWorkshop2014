@@ -68,9 +68,6 @@ public class DiscoveryActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_scan) {
-            if (mAdapter != null) {
-                mAdapter.clearAll();
-            }
             LocalBluetoothManager.getInstance().discoverDevice(mDiscoverListener);
             return true;
         }
@@ -89,12 +86,6 @@ public class DiscoveryActivity extends ActionBarActivity {
         @Override
         public void discoverFinish() {
             Toast.makeText(DiscoveryActivity.this, "discoverFinish", Toast.LENGTH_LONG).show();
-            if (mAdapter != null) {
-                List<BluetoothDevice> list = LocalBluetoothManager.getInstance().getPairedDevices();
-                for (BluetoothDevice device : list) {
-                    mAdapter.addItem(device);
-                }
-            }
         }
         
         @Override
@@ -110,11 +101,12 @@ public class DiscoveryActivity extends ActionBarActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             BluetoothDevice device = (BluetoothDevice) parent.getAdapter().getItem(position);
-            if (!LocalBluetoothManager.getInstance().isPairedDevice(device)) {
-                LocalBluetoothManager.getInstance().pairDevice(device);
+            BluetoothDevice newDevice = LocalBluetoothManager.getInstance().getDeviceWithLatestStatus(device);
+            if (!LocalBluetoothManager.getInstance().isPairedDevice(newDevice)) {
+                LocalBluetoothManager.getInstance().pairDevice(newDevice);
             } else {
                 Intent intent = new Intent(DiscoveryActivity.this, ClientConnectionActivity.class);
-                intent.putExtra("device", device);
+                intent.putExtra("device", newDevice);
                 startActivity(intent);
             }
         }

@@ -111,7 +111,9 @@ public class LocalBluetoothManager {
         if (!isBluetoothTurnOn()) {
             return null;
         }
-        
+        if (mBluetoothAdapter.isDiscovering()) {
+            mBluetoothAdapter.cancelDiscovery();
+        }
         Set<BluetoothDevice> devices = mBluetoothAdapter.getBondedDevices();
         ArrayList<BluetoothDevice> retList = new ArrayList<BluetoothDevice>();
         retList.addAll(devices);
@@ -130,9 +132,18 @@ public class LocalBluetoothManager {
         mBluetoothAdapter.startDiscovery();
     }
     
+    public void stopDiscoverDevice() {
+    	if (mBluetoothAdapter.isDiscovering()) {
+            mBluetoothAdapter.cancelDiscovery();
+        }
+    }
+    
     public void pairDevice(BluetoothDevice device) {
         if (!isBluetoothTurnOn()) {
             return;
+        }
+        if (mBluetoothAdapter.isDiscovering()) {
+            mBluetoothAdapter.cancelDiscovery();
         }
         try {
             Method m = device.getClass().getMethod("createBond", (Class[]) null);
@@ -146,6 +157,9 @@ public class LocalBluetoothManager {
         if (!isBluetoothTurnOn()) {
             return;
         }
+        if (mBluetoothAdapter.isDiscovering()) {
+            mBluetoothAdapter.cancelDiscovery();
+        }
         try {
             Method m = device.getClass()
                     .getMethod("removeBond", (Class[]) null);
@@ -153,6 +167,14 @@ public class LocalBluetoothManager {
         } catch (Exception e) {
             Log.e("BluetoothUtils", e.getMessage());
         }
+    }
+    
+    public BluetoothDevice getDeviceWithLatestStatus(BluetoothDevice localDevice) {
+    	if (!isBluetoothTurnOn()) {
+            return null;
+        }
+    	String address = localDevice.getAddress();
+    	return mBluetoothAdapter.getRemoteDevice(address);
     }
     
     public boolean isPairedDevice(BluetoothDevice device) {
